@@ -8,7 +8,7 @@ app.get("/", (req, res) => {
   res.send(`
     <html>
       <body>
-        <h2>Private Chat</h2>
+        <h2>ᴇʟᴠᴏʀɪᴀ</h2>
 
         <input id="name" placeholder="Your name"><br><br>
         <input id="room" placeholder="Room code"><br><br>
