@@ -8,7 +8,6 @@ app.get("/", (req, res) => {
   res.send(`
     <html>
       <body>
-<style>body{background:#050816;color:white;font-family:sans-serif;text-align:center;padding:20px}h2{color:#00f7ff;font-size:38px;text-shadow:0 0 20px #00f7ff}input{width:85%;padding:14px;margin:10px;border:none;border-radius:14px;background:#11182a;color:white;box-shadow:0 0 10px #00f7ff}button{padding:14px 28px;border:none;border-radius:14px;background:#00f7ff;color:black;font-weight:bold;box-shadow:0 0 20px #00f7ff}ul{list-style:none;padding:0}li{background:#11182a;margin:10px;padding:12px;border-radius:12px;box-shadow:0 0 10px #7b2fff}</style>
         <h2>ᴇʟᴠᴏʀɪᴀ</h2>
 
         <input id="name" placeholder="Your name"><br><br>
