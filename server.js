@@ -6,7 +6,7 @@ const app = express();
 
 app.use(express.static("public"));
 
-mongoose.connect("mongodb+srv://sukuna789600:Elvoria%40123@elvoria.sziv14f.mongodb.net/?appName=Elvoria")
+mongoose.connect(process.env.MONGO_URI)
 .then(() => console.log("MongoDB Connected"))
 .catch(err => console.log(err));
 
