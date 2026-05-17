@@ -1,27 +1,40 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>ᴇʟᴠᴏʀɪᴀ</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Join Chat</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="container">
-  <h1>ᴇʟᴠᴏʀɪᴀ</h1>
+<div class="join-container">
 
-  <input id="name" placeholder="Your name">
-  <input id="room" placeholder="Room code">
+  <h1>IPCHAT</h1>
 
-  <div id="chat"></div>
+  <input type="text" id="username" placeholder="Enter username">
 
-  <div class="bottom">
-    <input id="msg" placeholder="Type message...">
-    <button onclick="send()">Send</button>
-  </div>
+  <input type="text" id="room" placeholder="Enter room code">
+
+  <button onclick="joinRoom()">Join Room</button>
+
 </div>
 
-<script src="/socket.io/socket.io.js"></script>
-<script src="script.js"></script>
+<script>
+function joinRoom() {
+
+  const username = document.getElementById("username").value;
+  const room = document.getElementById("room").value;
+
+  if(!username || !room){
+    alert("Enter username and room");
+    return;
+  }
+
+  window.location.href =
+    `/chat.html?username=${username}&room=${room}`;
+}
+</script>
 
 </body>
 </html>

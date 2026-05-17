@@ -1,74 +1,99 @@
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial,sans-serif;
+}
+
 body{
-margin:0;
-background:#050816;
-font-family:sans-serif;
-color:white;
-display:flex;
-justify-content:center;
-align-items:center;
-height:100vh;
+  background:#0f0f0f;
+  color:white;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
 }
 
-.container{
-width:95%;
-max-width:420px;
-height:90vh;
-background:#0b1220;
-border-radius:24px;
-padding:20px;
-box-shadow:0 0 30px #00f7ff44;
-display:flex;
-flex-direction:column;
+.join-container,
+.chat-container{
+  width:95%;
+  max-width:500px;
+  height:90vh;
+  background:#1a1a1a;
+  border-radius:15px;
+  padding:20px;
+  display:flex;
+  flex-direction:column;
 }
 
-h1{
-text-align:center;
-color:#00f7ff;
-text-shadow:0 0 20px #00f7ff;
-margin-bottom:20px;
+.join-container{
+  justify-content:center;
+  gap:15px;
+}
+
+.join-container h1{
+  text-align:center;
+  color:#00ffcc;
 }
 
 input{
-padding:14px;
-border:none;
-border-radius:14px;
-margin-bottom:10px;
-background:#11182a;
-color:white;
-outline:none;
-}
-
-#chat{
-flex:1;
-overflow-y:auto;
-padding:10px 0;
-}
-
-.message{
-background:#11182a;
-padding:12px;
-border-radius:14px;
-margin-bottom:10px;
-box-shadow:0 0 10px #7b2fff55;
-word-wrap:break-word;
-}
-
-.bottom{
-display:flex;
-gap:10px;
-}
-
-.bottom input{
-flex:1;
-margin:0;
+  padding:15px;
+  border:none;
+  border-radius:10px;
+  background:#2a2a2a;
+  color:white;
+  font-size:16px;
 }
 
 button{
-border:none;
-padding:14px 20px;
-border-radius:14px;
-background:#00f7ff;
-font-weight:bold;
-color:black;
-box-shadow:0 0 20px #00f7ff88;
+  padding:15px;
+  border:none;
+  border-radius:10px;
+  background:#00ffcc;
+  color:black;
+  font-size:16px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.chat-header{
+  padding-bottom:15px;
+  border-bottom:1px solid #333;
+}
+
+#messages{
+  flex:1;
+  overflow-y:auto;
+  padding:15px 0;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.message{
+  max-width:75%;
+  padding:12px;
+  border-radius:12px;
+  word-wrap:break-word;
+}
+
+.mine{
+  align-self:flex-end;
+  background:#00ffcc;
+  color:black;
+}
+
+.other{
+  align-self:flex-start;
+  background:#333;
+}
+
+.input-area{
+  display:flex;
+  gap:10px;
+  margin-top:10px;
+}
+
+.input-area input{
+  flex:1;
 }

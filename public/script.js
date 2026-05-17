@@ -1,34 +1,67 @@
 const socket = io();
 
-let joined = false;
+const params = new URLSearchParams(window.location.search);
 
-function send() {
-  const name = document.getElementById("name").value;
-  const room = document.getElementById("room").value;
-  const msg = document.getElementById("msg").value;
+const username = params.get("username");
+const room = params.get("room");
 
-  if (!name || !room || !msg) return;
+const roomName = document.getElementById("room-name");
+const messages = document.getElementById("messages");
+const input = document.getElementById("message-input");
+const sendBtn = document.getElementById("send-btn");
 
-  if (!joined) {
-    socket.emit("join", room);
-    joined = true;
-  }
-
-  socket.emit("chat", {
-    room,
-    text: name + ": " + msg
-  });
-
-  document.getElementById("msg").value = "";
+if(roomName){
+  roomName.innerText = room;
 }
 
-socket.on("chat", (msg) => {
+if(room){
+  socket.emit("join-room", {
+    username,
+    room
+  });
+}
+
+sendBtn?.addEventListener("click", sendMessage);
+
+input?.addEventListener("keypress", (e)=>{
+  if(e.key === "Enter"){
+    sendMessage();
+  }
+});
+
+function sendMessage(){
+
+  const message = input.value.trim();
+
+  if(!message) return;
+
+  socket.emit("chat-message", {
+    username,
+    room,
+    message
+  });
+
+  input.value = "";
+}
+
+socket.on("chat-message", (data)=>{
+
   const div = document.createElement("div");
-  div.className = "message";
-  div.innerText = msg;
 
-  document.getElementById("chat").appendChild(div);
+  div.classList.add("message");
 
-  document.getElementById("chat").scrollTop =
-  document.getElementById("chat").scrollHeight;
+  if(data.username === username){
+    div.classList.add("mine");
+  }else{
+    div.classList.add("other");
+  }
+
+  div.innerHTML = `
+    <strong>${data.username}</strong><br>
+    ${data.message}
+  `;
+
+  messages.appendChild(div);
+
+  messages.scrollTop = messages.scrollHeight;
 });
