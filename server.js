@@ -6,9 +6,6 @@ const app = express();
 
 app.use(express.static("public"));
 
-mongoose.connect(process.env.MONGO_URI)
-.then(() => console.log("MongoDB Connected"))
-.catch(err => console.log(err));
 
 const http = require("http").createServer(app);
 
@@ -96,6 +93,16 @@ io.on("connection", (socket) => {
 
 });
 
-http.listen(3000, () => {
-  console.log("Server running on port 3000");
-});
+mongoose.connect(process.env.MONGO_URI)
+.then(() => {
+
+  console.log("MongoDB Connected");
+
+  const PORT = process.env.PORT || 3000;
+
+  http.listen(PORT, () => {
+    console.log("Server running on port " + PORT);
+  });
+
+})
+.catch(err => console.log(err));
