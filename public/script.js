@@ -65,3 +65,32 @@ socket.on("chat-message", (data)=>{
 
   messages.scrollTop = messages.scrollHeight;
 });
+
+socket.on("old-messages", (msgs)=>{
+
+  messages.innerHTML = "";
+
+  msgs.forEach((data)=>{
+
+    const div = document.createElement("div");
+
+    div.classList.add("message");
+
+    if(data.username === username){
+      div.classList.add("mine");
+    }else{
+      div.classList.add("other");
+    }
+
+    div.innerHTML = `
+      <strong>${data.username}</strong><br>
+      ${data.message}
+    `;
+
+    messages.appendChild(div);
+
+  });
+
+  messages.scrollTop = messages.scrollHeight;
+
+});

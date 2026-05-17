@@ -1,14 +1,7 @@
 const express = require("express");
-const mongoose = require("mongoose");
-const Message = require("./models/Message");
-
 const app = express();
 
 app.use(express.static("public"));
-
-mongoose.connect("mongodb+srv://sukuna789600:Elvoria%40123@elvoria.sziv14f.mongodb.net/?appName=Elvoria")
-.then(() => console.log("MongoDB Connected"))
-.catch(err => console.log(err));
 
 const http = require("http").createServer(app);
 
@@ -18,7 +11,7 @@ const users = {};
 
 io.on("connection", (socket) => {
 
-  socket.on("join-room", async (data) => {
+  socket.on("join-room", (data) => {
 
     socket.join(data.room);
 
@@ -26,12 +19,6 @@ io.on("connection", (socket) => {
       username: data.username,
       room: data.room
     };
-
-    const oldMessages = await Message.find({
-      room: data.room
-    }).sort({ time: 1 });
-
-    socket.emit("old-messages", oldMessages);
 
     const roomUsers =
       Object.values(users).filter(
@@ -45,22 +32,18 @@ io.on("connection", (socket) => {
 
   });
 
-  socket.on("chat-message", async (data) => {
+  socket.on("chat-message", (data) => {
 
     if(
       !data.message ||
       data.message.length > 500
     ){
-      return;
+
+
+
+
+return;
     }
-
-    const newMessage = new Message({
-      username: data.username,
-      room: data.room,
-      message: data.message
-    });
-
-    await newMessage.save();
 
     io.to(data.room).emit(
       "chat-message",
